@@ -3,15 +3,11 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    return "Working!"
-
-@app.route('/api/<int:id>',methods=['GET'])
+@app.route('/api/user/<int:id>',methods=['GET'])
 def getId(id):
     return str(id)
 
-@app.route('/api',methods=['POST'])
+@app.route('/api/user',methods=['POST'])
 def postId():
     return ""
 
