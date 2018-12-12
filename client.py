@@ -31,6 +31,6 @@ class Client:
         return requests.get(urlForId)
 
 if __name__ == "__main__":
-    client = Client("http://127.0.0.1:8080/api/user")
+    client = Client("http://127.0.0.1:3000/api/user")
     client.callGetId()
     client.callPostId()
