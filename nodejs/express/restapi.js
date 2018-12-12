@@ -13,6 +13,6 @@ router.post("/user", function(req, res){
 
 app.use("/api",router);
 
-var server = app.listen(3000, function () {
-    console.log("app running on port.", server.address().port);
+var server = app.listen(3000, () => {
+    console.log("Server running at http://localhost:" + server.address().port);
 });
