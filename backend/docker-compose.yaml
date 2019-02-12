@@ -1,0 +1,30 @@
+version: '2.3'
+
+services:
+  faceapp:
+    image: faceapp
+    build: ./api/
+    volumes: 
+      - ./api/:/usr/src/app
+    ports: 
+      - "3000:3000"
+      - "9229:9229"
+    links: 
+      - mongo
+      - tensorflow
+    depends_on:
+      - tensorflow
+  mongo:
+    image: mongo
+    command: mongod --port 27018
+    volumes:
+      - /data/db:/data/db
+    ports:
+      - "27018:27018"
+  tensorflow:
+    container_name: mlalgorithm
+    image: mlalgorithm
+    build: ./mlalgorithm/
+    runtime: nvidia
+    ports:
+      - "5000:5000"
