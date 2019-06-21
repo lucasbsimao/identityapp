@@ -3,4 +3,5 @@
 .vscode/
 *~
 *MNIST_data
+*.idea
 
