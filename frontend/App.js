@@ -1,29 +1,39 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React, { Component } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import { RNCamera } from "react-native-camera";
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+export default class App extends Component {
+  takePicture = async () => {
+    if (this.camera) {
+      const options = { quality: 0.5, base64: true };
+      const data = await this.camera.takePictureAsync(options);
 
-type Props = {};
-export default class App extends Component<Props> {
+      alert(data.uri);
+    }
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <RNCamera
+          ref={camera => {
+            this.camera = camera;
+          }}
+          style={styles.preview}
+          type={RNCamera.Constants.Type.back}
+          autoFocus={RNCamera.Constants.AutoFocus.on}
+          flashMode={RNCamera.Constants.FlashMode.off}
+          permissionDialogTitle={"Permission to use camera"}
+          permissionDialogMessage={
+            "We need your permission to use your camera phone"
+          }
+        />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={this.takePicture} style={styles.capture}>
+            <Text style={styles.buttonText}> SNAP </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -32,18 +42,29 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    flexDirection: "column",
+    backgroundColor: "black"
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  preview: {
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center"
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  buttonContainer: {
+    flex: 0,
+    flexDirection: "row",
+    justifyContent: "center"
   },
+  capture: {
+    flex: 0,
+    backgroundColor: "#fff",
+    borderRadius: 5,
+    padding: 15,
+    paddingHorizontal: 20,
+    alignSelf: "center",
+    margin: 20
+  },
+  buttonText: {
+    fontSize: 14
+  }
 });
