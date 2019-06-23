@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Icon } from 'native-base'
 
 import { RNCamera } from "react-native-camera";
 
@@ -30,13 +31,14 @@ export default class App extends Component {
               message: 'Por favor, habilite o uso da câmera para prosseguir',
               buttonPositive: 'Ok',
               buttonNegative: 'Cancelar',
-          }}
-        />
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={this.takePicture} style={styles.capture}>
-            <Text style={styles.buttonText}> SNAP </Text>
-          </TouchableOpacity>
-        </View>
+          }}  
+        >
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={this.takePicture} style={styles.capture}>
+              <Icon name="camera" />
+            </TouchableOpacity>
+          </View>
+        </RNCamera>
       </View>
     );
   }
@@ -59,13 +61,16 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   capture: {
-    flex: 0,
-    backgroundColor: "#fff",
-    borderRadius: 5,
-    padding: 15,
-    paddingHorizontal: 20,
-    alignSelf: "center",
-    margin: 20
+    backgroundColor: "#eee",
+    width: 64,
+    height: 64,
+    borderWidth: 4,
+    borderColor: '#555',
+    borderRadius: 100,
+    margin: 20,
+    marginBottom: 60,
+    justifyContent: "center",
+    alignItems: "center"
   },
   buttonText: {
     fontSize: 14
