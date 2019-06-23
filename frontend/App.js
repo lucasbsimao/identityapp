@@ -24,10 +24,13 @@ export default class App extends Component {
           type={RNCamera.Constants.Type.back}
           autoFocus={RNCamera.Constants.AutoFocus.on}
           flashMode={RNCamera.Constants.FlashMode.off}
-          permissionDialogTitle={"Permission to use camera"}
-          permissionDialogMessage={
-            "We need your permission to use your camera phone"
-          }
+          captureAudio={false}
+          androidCameraPermissionOptions={{
+              title: 'Permissão para usar a câmera',
+              message: 'Por favor, habilite o uso da câmera para prosseguir',
+              buttonPositive: 'Ok',
+              buttonNegative: 'Cancelar',
+          }}
         />
         <View style={styles.buttonContainer}>
           <TouchableOpacity onPress={this.takePicture} style={styles.capture}>
